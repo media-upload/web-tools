@@ -1,0 +1,199 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/app-datepicker/app-datepicker-dialog.html">
+<link rel="import" href="../bower_components/compound-timepicker/compound-timepicker-dialog.html">
+<link rel="import" href="../bower_components/file-upload/file-upload.html">
+<link rel="import" href="../bower_components/paper-bottom-sheet/paper-bottom-sheet.html">
+<link rel="import" href="../bower_components/paper-bottom-sheet/paper-bottom-sheet-item.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/backend-template/backend-template.html">
+<link rel="import" href="../bower_components/backend-template/backend-category.html">
+<link rel="import" href="../bower_components/backend-template/backend-page.html">
+<link rel="import" href="../bower_components/paper-date-picker-item/paper-date-picker-item.html">
+<link rel="import" href="../bower_components/paper-date-picker-item/paper-datetime-picker-item.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="my-icons.html">
+
+<dom-module id="my-app">
+  <template is="dom-bind" id="test">
+    <style include="shared-styles">
+
+      paper-material {
+        background: #fff;
+        padding: 30px;
+        margin: 30px 0;
+      }
+
+      .container {
+        position: relative;
+      }
+
+      #submit {
+        background-color: var(--paper-indigo-500);
+        color: #fff;
+        margin-top: 24px;
+      }
+
+      paper-input {
+        max-width: 320px;
+      }
+    </style>
+    <!--<compound-timepicker-dialog with-backdrop id="startTimePicker" time="{{time}}"></compound-timepicker-dialog>-->
+    <backend-template name="EASY BACKEND">
+      <backend-category icon="icons:home" name="Web Tools" route="cat1">
+        <backend-page name="MEDIA UPLOAD TOOL" route="page-a">
+          <paper-material>
+            <div class="circle">1</div>
+            <h1>Media Upload Tool</h1>
+            <p>Upload your media files to create publicly accessbile endpoint URLs which can be timestamped.</p>
+            <p>
+            <p>
+              <file-upload droppable="true" raised="true" multi="true" accept="image/*">Choose Image</file-upload>
+            </p>
+            <p>
+              <paper-datetime-picker-item icon="icons:today" placeholder="Add date, time defaults to 9AM" default-time="09:00"></paper-datetime-picker-item>
+            </p>
+
+            <paper-input label="Alt text"></paper-input>
+            <p>
+              <paper-button raised on-tap="submit" name="submit" id="submit">Submit</paper-button>
+            </p>
+          </paper-material>
+        </backend-page>
+        <!--<backend-page name="PAGE B" route="page-b">-->
+          <!--<paper-material>-->
+            <!--<h1>Content page B</h1>-->
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
+              <!--tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
+              <!--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
+              <!--consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+              <!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
+              <!--proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+          <!--</paper-material>-->
+        <!--</backend-page>-->
+      </backend-category>
+      <backend-category icon="icons:dashboard" name="Category 2" route="cat2">
+        <backend-page name="PAGE C" route="page-c">
+          <paper-material>
+            <h1>Content page C</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </paper-material>
+          <paper-material>
+            <h1>Content page C</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </paper-material>
+          <paper-material>
+            <h1>Content page C</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </paper-material>
+          <paper-material>
+            <h1>Content page C</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </paper-material>
+          <paper-material>
+            <h1>Content page C</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </paper-material>
+        </backend-page>
+        <backend-page name="PAGE D" route="page-d">
+          <paper-material>
+            <h1>Content page D</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </paper-material>
+        </backend-page>
+      </backend-category>
+    </backend-template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-app',
+
+      openSheet: function () {
+        this.$.sheet.open();
+      },
+
+      properties: {
+        planDate: {
+          type: Object,
+          value: function () {
+            return {
+              startDate: '2016/12/01',
+              endDate: '2016/12/31'
+            };
+          },
+          observer: '_planDateChanged'
+        },
+      },
+
+      openStartDate: function () {
+        this.$.startDatePicker.open();
+      },
+
+      openStartTime: function () {
+        this.$.startTimePicker.open();
+      },
+
+      submit: function () {
+        console.log('submit!');
+      },
+
+      _planDateChanged: function (_newv, _oldv) {
+        console.log('plan-date-changed:', _newv, _oldv);
+      }
+
+    });
+  </script>
+</dom-module>
