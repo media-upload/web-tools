@@ -122,12 +122,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <h1>Component Builder</h1>
             </div>
             <p>Create and preview components on all devices.</p>
-            <p>
-            <paper-input label="Image source URL" hidden$="[[!editable]]" id="imgUrl"
-                         placeholder="e.g. http://lorempixel.com/640/320/" autosave="test" results="5" on-change="urlInputChange">
-              <iron-icon icon="icons:insert-photo" prefix></iron-icon>
-            </paper-input>
-            </p>
 
             <iron-image style="width:240px; height:460px; background-color: white;"
                         sizing="contain" preload fade src="../images/iphone.png"></iron-image>
@@ -143,6 +137,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             sizing="cover" preload fade src="[[imgSrc]]"></iron-image>
 
               </iron-swipeable-container>
+            <paper-input label="Image source URL" id="imgUrl" autosave="test" results="5" on-change="urlInputChange">
+              <iron-icon icon="icons:insert-photo" prefix></iron-icon>
+            </paper-input>
             <paper-input label="Image link URL">
               <iron-icon icon="icons:link" prefix></iron-icon>
             </paper-input>
