@@ -33,6 +33,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/backend-template/backend-page.html">
 <link rel="import" href="../bower_components/paper-date-picker-item/paper-date-picker-item.html">
 <link rel="import" href="../bower_components/paper-date-picker-item/paper-datetime-picker-item.html">
+<link rel="import" href="../bower_components/iron-swipeable-container/iron-swipeable-container.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="my-icons.html">
 
@@ -40,10 +44,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template is="dom-bind" id="test">
     <style include="shared-styles">
 
+      :host {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
+      }
+
       paper-material {
         background: #fff;
         padding: 30px;
-        margin: 30px 0;
+        margin: 16px;
+        max-width: 650px;
       }
 
       .container {
@@ -59,29 +69,96 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       paper-input {
         max-width: 320px;
       }
+
+      .swipe {
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+      }
+
+      paper-card {
+        max-width: 640px;
+        max-height: 320px;
+        margin-bottom: 16px;
+      }
+
+      paper-datetime-picker-item {
+        width: 380px;
+      }
+
+      .callout {
+        cursor: pointer;
+      }
+      .yellow-button {
+        color: var(--paper-yellow-a100);
+      }
+      .container {
+        @apply(--layout-horizontal);
+      }
+      .circle {
+        margin-right: 12px;
+      }
+      iron-swipeable-container > iron-image:not(:first-child) {
+        display: none;
+      }
+      iron-swipeable-container {
+          position: absolute;
+          top: 407px;
+          left: 81px;
+      }
     </style>
-    <!--<compound-timepicker-dialog with-backdrop id="startTimePicker" time="{{time}}"></compound-timepicker-dialog>-->
-    <backend-template name="EASY BACKEND">
-      <backend-category icon="icons:home" name="Web Tools" route="cat1">
-        <backend-page name="MEDIA UPLOAD TOOL" route="page-a">
+    <!--<paper-toolbar></paper-toolbar>-->
+    <!--<backend-template name="EASY BACKEND">-->
+      <!--<backend-category icon="icons:home" name="Web Tools" route="cat1">-->
+        <!--<backend-page name="COMPONENT BUILDER" route="page-a">-->
           <paper-material>
-            <div class="circle">1</div>
-            <h1>Media Upload Tool</h1>
-            <p>Upload your media files to create publicly accessbile endpoint URLs which can be timestamped.</p>
+            <div class="container">
+              <div class="circle">1</div>
+              <h1>Component Builder</h1>
+            </div>
+            <p>Enter a URL</p>
             <p>
-            <p>
-              <file-upload droppable="true" raised="true" multi="true" accept="image/*">Choose Image</file-upload>
-            </p>
-            <p>
-              <paper-datetime-picker-item icon="icons:today" placeholder="Add date, time defaults to 9AM" default-time="09:00"></paper-datetime-picker-item>
+            <paper-input label="URL path to image" type="search" hidden$="[[!editable]]" id="imgUrl"
+                         placeholder="e.g. http://lorempixel.com/640/320/" autosave="test" results="5" on-change="urlInputChange">
+            </paper-input>
             </p>
 
+            <iron-image style="width:375px; height:667px; background-color: white;"
+                        sizing="contain" preload fade src="../images/iphone.png"></iron-image>
+            <!--<iron-pages>-->
+              <iron-swipeable-container>
+                <iron-image style="width:274px; height:176px;"
+                            sizing="cover" preload fade src="[[imgSrc]]"></iron-image>
+
+                <iron-image style="width:274px; height:176px;"
+                            sizing="cover" preload fade src="[[imgSrc]]"></iron-image>
+
+                <iron-image style="width:274px; height:176px;"
+                            sizing="cover" preload fade src="[[imgSrc]]"></iron-image>
+
+              </iron-swipeable-container>
+            <!--</iron-pages>-->
+
             <paper-input label="Alt text"></paper-input>
+            <!--<p>-->
+              <!--or-->
+            <!--</p>-->
+            <!--<p>-->
+              <!--<file-upload droppable="true" raised="true" multi="true" accept="image/*">Choose Image</file-upload>-->
+            <!--</p>-->
+            <p>
+              <paper-card class="callout">
+                <paper-datetime-picker-item icon="icons:today" placeholder="Add date, time defaults to 9AM" default-time="09:00"></paper-datetime-picker-item>
+              </paper-card>
+            </p>
+
             <p>
               <paper-button raised on-tap="submit" name="submit" id="submit">Submit</paper-button>
             </p>
           </paper-material>
-        </backend-page>
+        <!--</backend-page>-->
         <!--<backend-page name="PAGE B" route="page-b">-->
           <!--<paper-material>-->
             <!--<h1>Content page B</h1>-->
@@ -93,68 +170,72 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <!--proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
           <!--</paper-material>-->
         <!--</backend-page>-->
-      </backend-category>
-      <backend-category icon="icons:dashboard" name="Category 2" route="cat2">
-        <backend-page name="PAGE C" route="page-c">
-          <paper-material>
-            <h1>Content page C</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </paper-material>
-          <paper-material>
-            <h1>Content page C</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </paper-material>
-          <paper-material>
-            <h1>Content page C</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </paper-material>
-          <paper-material>
-            <h1>Content page C</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </paper-material>
-          <paper-material>
-            <h1>Content page C</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </paper-material>
-        </backend-page>
-        <backend-page name="PAGE D" route="page-d">
-          <paper-material>
-            <h1>Content page D</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </paper-material>
-        </backend-page>
-      </backend-category>
-    </backend-template>
+      <!--</backend-category>-->
+      <!--<backend-category icon="icons:dashboard" name="Category 2" route="cat2">-->
+        <!--<backend-page name="PAGE C" route="page-c">-->
+          <!--<paper-material>-->
+            <!--<h1>Content page C</h1>-->
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
+              <!--tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
+              <!--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
+              <!--consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+              <!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
+              <!--proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+          <!--</paper-material>-->
+          <!--<paper-material>-->
+            <!--<h1>Content page C</h1>-->
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
+              <!--tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
+              <!--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
+              <!--consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+              <!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
+              <!--proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+          <!--</paper-material>-->
+          <!--<paper-material>-->
+            <!--<h1>Content page C</h1>-->
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
+              <!--tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
+              <!--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
+              <!--consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+              <!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
+              <!--proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+          <!--</paper-material>-->
+          <!--<paper-material>-->
+            <!--<h1>Content page C</h1>-->
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
+              <!--tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
+              <!--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
+              <!--consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+              <!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
+              <!--proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+          <!--</paper-material>-->
+          <!--<paper-material>-->
+            <!--<h1>Content page C</h1>-->
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
+              <!--tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
+              <!--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
+              <!--consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+              <!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
+              <!--proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+          <!--</paper-material>-->
+        <!--</backend-page>-->
+        <!--<backend-page name="PAGE D" route="page-d">-->
+          <!--<paper-material>-->
+            <!--<h1>Content page D</h1>-->
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod-->
+              <!--tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,-->
+              <!--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo-->
+              <!--consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+              <!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non-->
+              <!--proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+          <!--</paper-material>-->
+        <!--</backend-page>-->
+      <!--</backend-category>-->
+    <!--</backend-template>-->
+    <!--<paper-toast id="mainToast" text="This toast auto-closes after 3 seconds"></paper-toast>-->
+    <paper-toast id="mainToast" duration="0" text="This toast will stay opened until you close it, or open another toast.">
+      <paper-button on-tap="closeToast" class="yellow-button">Close now!</paper-button>
+    </paper-toast>
   </template>
 
   <script>
@@ -166,6 +247,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       properties: {
+
+        imgSrc: {
+          type: String,
+          notify: true,
+          value: 'http://lorempixel.com/320/160'
+        },
+
         planDate: {
           type: Object,
           value: function () {
@@ -175,7 +263,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             };
           },
           observer: '_planDateChanged'
-        },
+        }
       },
 
       openStartDate: function () {
@@ -188,6 +276,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       submit: function () {
         console.log('submit!');
+        this.$.mainToast.open();
+      },
+
+      urlInputChange: function() {
+        console.log('got here');
+        console.log(this.$.imgUrl.value);
+        this.imgSrc = this.$.imgUrl.value;
+      },
+
+      closeToast: function() {
+        this.$.mainToast.close();
       },
 
       _planDateChanged: function (_newv, _oldv) {
