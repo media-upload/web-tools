@@ -37,6 +37,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="my-icons.html">
@@ -58,7 +59,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .container {
-        position: relative;
+        /*position: relative;*/
+        @apply(--layout-center-justified);
       }
 
       #submit {
@@ -108,7 +110,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       iron-swipeable-container {
           position: absolute;
           top: 257px;
-          left: 50px;
+          left: 97px;
       }
       paper-input iron-icon {
         color: #9b9b9b;
@@ -122,6 +124,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <h1>Component Builder</h1>
             </div>
             <p>Create and preview components on all devices.</p>
+
+            <div class="container">
 
             <iron-image style="width:240px; height:460px; background-color: white;"
                         sizing="contain" preload fade src="../images/iphone.png"></iron-image>
@@ -137,19 +141,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             sizing="cover" preload fade src="[[imgSrc]]"></iron-image>
 
               </iron-swipeable-container>
-            <paper-input label="Image source URL" id="imgUrl" autosave="test" results="5" on-change="urlInputChange">
-              <iron-icon icon="icons:insert-photo" prefix></iron-icon>
-            </paper-input>
-            <paper-input label="Image link URL">
+            </div>
+
+            <paper-input label="Image link URL" id="imgUrl" autosave="test" results="5" on-change="urlInputChange" hidden$="[[isFrench]]">
               <iron-icon icon="icons:link" prefix></iron-icon>
             </paper-input>
-            <paper-input label="Image text label">
+            <paper-input label="Image link URL (FR)" id="imgUrl" autosave="test" results="5" on-change="urlInputChange" hidden$="[[!isFrench]]">
+              <iron-icon icon="icons:link" prefix></iron-icon>
+            </paper-input>
+
+            <paper-input label="Image text label" hidden$="[[isFrench]]">
               <iron-icon icon="icons:label-outline" prefix></iron-icon>
             </paper-input>
+            <paper-input label="Image text label (FR)" hidden$="[[!isFrench]]">
+              <iron-icon icon="icons:label-outline" prefix></iron-icon>
+            </paper-input>
+
+            <paper-input label="Image launch URL" hidden$="[[isFrench]]">
+              <iron-icon icon="icons:launch" prefix></iron-icon>
+            </paper-input>
+            <paper-input label="Image launch URL (FR)" hidden$="[[!isFrench]]">
+              <iron-icon icon="icons:launch" prefix></iron-icon>
+            </paper-input>
+
             <paper-datetime-picker-item icon="icons:today" placeholder="Start date / time (PST)" default-time="09:00"></paper-datetime-picker-item>
             <paper-datetime-picker-item icon="icons:event" placeholder="End date / time (PST)" default-time="09:00"></paper-datetime-picker-item>
             <p>
               <paper-button raised on-tap="submit" name="submit" id="submit">Publish</paper-button>
+              <paper-checkbox on-tap="toggleFrench">French</paper-checkbox>
             </p>
           </paper-material>
 
@@ -174,6 +193,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: 'http://lorempixel.com/640/320'
         },
 
+        isFrench: {
+          type: Boolean,
+          notify: true,
+          value: false
+        },
+
         planDate: {
           type: Object,
           value: function () {
@@ -184,6 +209,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
           observer: '_planDateChanged'
         }
+      },
+
+      toggleFrench: function() {
+        this.isFrench = !this.isFrench;
       },
 
       openStartDate: function () {
