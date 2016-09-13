@@ -89,6 +89,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         max-width: 320px;
         border-bottom: 1px solid #777;
         cursor: pointer;
+        margin: 22px 0;
       }
 
       .yellow-button {
@@ -107,6 +108,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           position: absolute;
           top: 407px;
           left: 81px;
+      }
+      paper-input iron-icon {
+        color: #9b9b9b;
+        margin-right: 4px;
       }
     </style>
           <paper-material>
@@ -135,18 +140,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             sizing="cover" preload fade src="[[imgSrc]]"></iron-image>
 
               </iron-swipeable-container>
-            <paper-input label="Link URL"></paper-input>
-            <paper-input label="Image caption / alt text"></paper-input>
-            <p>
-              I need this image to be active from
-            </p>
-            <p>
-              <paper-datetime-picker-item icon="icons:today" placeholder="Start date / time (PST)" default-time="09:00"></paper-datetime-picker-item>
-            </p>
-            <p>until</p>
-            <p>
-              <paper-datetime-picker-item icon="icons:today" placeholder="End date / time (PST)" default-time="09:00"></paper-datetime-picker-item>
-            </p>
+            <paper-input label="Link URL">
+              <iron-icon icon="icons:link" prefix></iron-icon>
+            </paper-input>
+            <paper-input label="Image label">
+              <iron-icon icon="icons:label-outline" prefix></iron-icon>
+            </paper-input>
+            <paper-datetime-picker-item icon="icons:today" placeholder="Start date / time (PST)" default-time="09:00"></paper-datetime-picker-item>
+            <paper-datetime-picker-item icon="icons:event" placeholder="End date / time (PST)" default-time="09:00"></paper-datetime-picker-item>
             <p>
               <paper-button raised on-tap="submit" name="submit" id="submit">Download</paper-button>
             </p>
